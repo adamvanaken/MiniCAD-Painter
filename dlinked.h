@@ -1,3 +1,20 @@
+#ifndef DLINKED_H
+#define DLINKED_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
+typedef int bool;
+#define true 1
+#define false 0
+
 #define INT 0
 #define DOUBLE 1
 #define LINE 2
@@ -58,10 +75,19 @@ struct Poly {
 };
 
 Integer *make_int(int x);
+
 Double *make_double(double x);
+
 Shape *make_shape(int type, void *shape);
+
 Line *make_line(double x_1, double y_1, double x_2, double y_2);
+
 Triangle *make_triangle(double x_1, double y_1, double width, double height);
+
 Rectangle *make_rectangle(double x_1, double y_1, double x_2, double y_2, double x_3, double y_3, double x_4, double y_4);
+
 Circle *make_circle(double x, double y, double r);
+
 Poly *make_poly(Point p);
+
+#endif

@@ -1,13 +1,8 @@
-#ifdef __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
-
 // To suppress deprecation warnings
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-#include "draw.c"
+// #include "draw.h"
+#include "picker.h"
 
 void init() {
     // Set the clear color to white
@@ -22,15 +17,6 @@ void init() {
     currentTool = t_RECT;
     currentColor = c_BLACK;
 }
-
-// void display2(void)
-// {
-// glClearColor(1.0,1.0,1.0,1);
-// glClear(GL_COLOR_BUFFER_BIT);
-// glLoadIdentity();
-// printf("display2\n");
-// glFlush();
-// }
 
 void display(void) {
     // Clear the window
@@ -82,11 +68,6 @@ void display(void) {
                     glVertex2f(((Line *)end->shape)->x1, ((Line *)end->shape)->y1);
                     glVertex2f(((Line *)end->shape)->x2, ((Line *)end->shape)->y2);
                 glEnd();
-
-                // printf("%f\n", ((Line *)end->shape)->x1);
-                // printf("%f\n", ((Line *)end->shape)->x2);
-                // printf("%f\n", ((Line *)end->shape)->y1);
-                // printf("%f\n", ((Line *)end->shape)->y2);
             }
             else if (end->type == TRI)
             {
@@ -145,22 +126,8 @@ void display(void) {
         DrawToolSelect(mouseX, mouseY);
     }
     
-    // Flush the buffer to force drawing of all objects thus far
-    //glFlush();
     glutSwapBuffers();
 }
-
-// void display_both(void) {
-
-//     glutSetWindow( window_1 );
-//     display();  // Update screen with new rotation data
- 
-//     if (window_2_open) {
-//         glutSetWindow( window_2 );
-//         display_2();  // Update screen with new rotation data
-//     }
-
-// }
 
 int main(int argc, char **argv) {
   // Initializes GLUT and processes commandline arguments, if any
@@ -170,8 +137,8 @@ int main(int argc, char **argv) {
   glutInitWindowPosition(100,100);
   glutInitWindowSize(WIDTH,HEIGHT);
 
-    // Make Main outer window
-    window_1 = glutCreateWindow("Window 1");
+  // Make Main outer window
+  canvas_window = glutCreateWindow("Window 1");
 
   // Callback Registration
   glutDisplayFunc(display);
@@ -187,10 +154,8 @@ int main(int argc, char **argv) {
 
   createColorPicker();
 
-  glutSetWindow(window_1);
+  glutSetWindow(canvas_window);
 
-  // Pass program control to tk's event handling code
-  // In other words, loop forever
   glutMainLoop();
 
   return 0;

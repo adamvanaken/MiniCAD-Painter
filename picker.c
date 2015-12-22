@@ -1,12 +1,16 @@
-int window_1;
-int window_2;
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "picker.h"
+
+int canvas_window;
+int color_window;
 
 int p_height = 500;
 int p_width = 150;
 
 const int n_colors = 4;
 
-bool window_2_open = false;
+bool color_window_open = false;
 
 float a[n_colors][3] = {  
    { 0.1, 0.5, 0.2 } ,
@@ -15,7 +19,8 @@ float a[n_colors][3] = {
    { 0.5, 0.5, 0.5 }
 };
 
-void init_2() {
+void init_2()
+{
     // Set the clear color to white
     glClearColor(1.0,1.0,1.0,1);
     glMatrixMode(GL_PROJECTION);
@@ -24,7 +29,8 @@ void init_2() {
     glLineStipple(3, 0xAAAA);
 }
 
-void display_2(void) {
+void display_2(void)
+{
 	
 	glClearColor(1.0,1.0,1.0,1);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -55,8 +61,6 @@ void display_2(void) {
 	}
 
 	glFlush();
-	// glutSwapBuffers();
-	// glutSetWindow(window_1);
 }
 
 // button = { GLUT_LEFT_BUTTON, GLUT_MIDDLE_BUTTON, GLUT_RIGHT_BUTTON }
@@ -64,7 +68,6 @@ void display_2(void) {
 void mouseCallback_2(int button, int state, int x, int y)
 {
     printf("%d, %d\n", x, y);
- 
 }
 
 void keyboardCallback_2(unsigned char key, GLint x, GLint y)
@@ -73,10 +76,11 @@ void keyboardCallback_2(unsigned char key, GLint x, GLint y)
     {
         // c
         case 99:
-          window_2_open = false;
-          glutSetWindow( window_2 );
+          color_window_open = false;
+          glutSetWindow( color_window );
 			glutHideWindow();
-			glutSetWindow( window_1 );
+			glutSetWindow( canvas_window
+		 );
           break;
 
     }
@@ -93,26 +97,26 @@ void reshapeCallback_2(int width, int height)
 	glutReshapeWindow( p_width, p_height);
 }
 
-void createColorPicker() {
-
+void createColorPicker()
+{
     // Create second window
     glutInitWindowPosition(700 + 10, 100);
     glutInitWindowSize(p_width, p_height);
     // glutInitWindowSize(700, 700);
-    window_2 = glutCreateWindow("Color Picker");
+    color_window = glutCreateWindow("Color Picker");
     glutKeyboardFunc(keyboardCallback_2);
     glutDisplayFunc(display_2);
     glutReshapeFunc(reshapeCallback_2);
     glutHideWindow();
 }
 
-void openColorPicker() {
-
-    glutSetWindow( window_2 );
+void openColorPicker()
+{
+    glutSetWindow( color_window );
 	glutShowWindow();
-	glutSetWindow( window_1 );
+	glutSetWindow( canvas_window );
 
-    window_2_open = true;
+    color_window_open = true;
 }
 
 

@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
 #include "dlinked.h"
 
 Integer *make_int(int x)

@@ -1,12 +1,10 @@
-#include <math.h>
-#include "helper.c"
-#include "picker.c"
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-#define PI 3.14159265
+#include "callbacks.h"
 
 int WIDTH = 700, HEIGHT = 700;
 
-enum Tool { t_LINE = 0, t_TRI, t_RECT, t_CIRCLE, t_POLY } ;
+// enum Tool { t_LINE = 0, t_TRI, t_RECT, t_CIRCLE, t_POLY } ;
 
 enum Tool currentTool;
 
@@ -222,7 +220,6 @@ void passiveMotionCallback(int x, int y)
 // state = { GLUT_UP, GLUT_DOWN }
 void mouseCallback(int button, int state, int x, int y)
 {
-    glutSetWindow( window_1 );
     glutPostRedisplay();  // Update screen with new rotation data
 
     switch (button)

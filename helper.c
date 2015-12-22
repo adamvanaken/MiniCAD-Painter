@@ -1,10 +1,14 @@
-#include "dlinked.c"
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#include "helper.h"
 
 Shape *start;
 Shape *end;
 
 Poly *customPoly;
 int customPolyCount = 0;
+
+bool fill = true;
 
 enum Color currentColor;
 

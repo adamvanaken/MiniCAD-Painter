@@ -1,12 +1,4 @@
-#define RES 400
-
-typedef int bool;
-#define true 1
-#define false 0
-
-bool fill = true;
-
-#include "callbacks.c"
+#include "draw.h"
 
 void DrawRect(int x, int y, int r)
 {
