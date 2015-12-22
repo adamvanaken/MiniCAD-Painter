@@ -1,0 +1,21 @@
+Adam Van Aken
+
+Compile with 'make' and run with './main.o'
+
+Can switch tool by holding down middle-mouse button (or 'up' arrow or 'shift+T') and dragging mouse cursor to desired tool.
+
+Known bugs and limitations: Window resize is "disabled"
+
+Extra Credit: Polygon mode works, but only for convex shapes AND/OR unfilled mode
+
+File directory:
+    - main.c
+        This includes the main, init and display loop.
+    - draw.c
+        This includes the draw calls for different shapes. They are all called from within the display loop in main.c
+    - callbacks.c
+        This file mostly just holds the callbacks for the OpenGL events. However it also manages setting the tool with middle-mouse button/up arrow/shift+T.
+    - helper.c
+        This file has helper functions to add new shapes to the list of shapes. It also includes the clear functions.
+    - dlinked.c (dlinked.h)
+        This is the linked list struct as well as all shape structs and constructor calls.
