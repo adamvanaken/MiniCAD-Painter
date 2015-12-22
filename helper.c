@@ -11,6 +11,8 @@ int customPolyCount = 0;
 bool fill = true;
 
 enum Color currentColor;
+enum Color customColor;
+float custom_color[4];
 
 double Distance(double x1, double y1, double x2, double y2)
 {
@@ -52,7 +54,10 @@ void AddPoly(Poly *p)
     {
         Shape *s = make_shape(POLY, customPoly_copy);
         s->filled = fill;
-        s->color = currentColor;
+        s->color[0] = custom_color[0];
+        s->color[1] = custom_color[1];
+        s->color[2] = custom_color[2];
+        s->color[3] = custom_color[3];
 
         s->prev = end;
         end->next = s;
@@ -64,7 +69,10 @@ void AddPoly(Poly *p)
         Line *l = make_line(p->p.x, p->p.y, p->next->p.x, p->next->p.y);
         Shape *s = make_shape(LINE, l);
         s->filled = fill;
-        s->color = currentColor;
+        s->color[0] = custom_color[0];
+        s->color[1] = custom_color[1];
+        s->color[2] = custom_color[2];
+        s->color[3] = custom_color[3];
 
         s->prev = end;
         end->next = s;
@@ -86,7 +94,10 @@ void AddLine(double x1, double y1, double x2, double y2)
     Line *l = make_line(x1, y1, x2, y2);
     Shape *n = make_shape(LINE, l);
     n->filled = fill;
-    n->color = currentColor;
+    n->color[0] = custom_color[0];
+    n->color[1] = custom_color[1];
+    n->color[2] = custom_color[2];
+    n->color[3] = custom_color[3];
 
     n->prev = end;
     end->next = n;
@@ -100,7 +111,10 @@ void AddCircle(double x, double y, double r)
     Circle *c = make_circle(x, y, r);
     Shape *n = make_shape(CIRCLE, c);
     n->filled = fill;
-    n->color = currentColor;
+    n->color[0] = custom_color[0];
+    n->color[1] = custom_color[1];
+    n->color[2] = custom_color[2];
+    n->color[3] = custom_color[3];
 
     n->prev = end;
     end->next = n;
@@ -114,7 +128,10 @@ void AddRectangle(double x_1, double y_1, double x_2, double y_2)
     Rectangle *r = make_rectangle(x_1, y_1, x_1, y_2, x_2, y_2, x_2, y_1);
     Shape *n = make_shape(RECT, r);
     n->filled = fill;
-    n->color = currentColor;
+    n->color[0] = custom_color[0];
+    n->color[1] = custom_color[1];
+    n->color[2] = custom_color[2];
+    n->color[3] = custom_color[3];
 
     n->prev = end;
     end->next = n;
@@ -128,7 +145,10 @@ void AddTriangle(double x_1, double y_1, double width, double height)
     Triangle *t = make_triangle(x_1, y_1, width, height);
     Shape *n = make_shape(TRI, t);
     n->filled = fill;
-    n->color = currentColor;
+    n->color[0] = custom_color[0];
+    n->color[1] = custom_color[1];
+    n->color[2] = custom_color[2];
+    n->color[3] = custom_color[3];
 
     n->prev = end;
     end->next = n;

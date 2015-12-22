@@ -16,6 +16,8 @@ double mouseMoveX, mouseMoveY;
 bool drawing = false;
 bool drawPoly = false;
 
+int selectedColor = 0;
+
 void setTool(int x, int y)
 {
     float distance = Distance(mouseX, mouseY, x, HEIGHT - y);
@@ -94,6 +96,8 @@ void reshapeCallback(int width, int height)
 // Set if the Alt modifier is active.
 void keyboardCallback(unsigned char key, GLint x, GLint y)
 {
+    int curCol = currentColor;
+
     switch (key)
     {
         // escape, Q, q
@@ -147,6 +151,44 @@ void keyboardCallback(unsigned char key, GLint x, GLint y)
         case 99:
           Clear();
           break;
+    }
+
+    if (currentColor != curCol) {
+        switch (currentColor)
+        {
+            case c_RED:
+                custom_color[0] = 1;
+                custom_color[1] = 0;
+                custom_color[2] = 0;
+                custom_color[3] = 1;
+                selectedColor = 1;
+                break;
+            case c_GREEN:
+                custom_color[0] = 0;
+                custom_color[1] = 1;
+                custom_color[2] = 0;
+                custom_color[3] = 1;
+                selectedColor = 2;
+                break;
+            case c_BLUE:
+                custom_color[0] = 0;
+                custom_color[1] = 0;
+                custom_color[2] = 1;
+                custom_color[3] = 1;
+                selectedColor = 3; 
+                break;
+            case c_BLACK:
+            default:
+                custom_color[0] = 0;
+                custom_color[1] = 0;
+                custom_color[2] = 0;
+                custom_color[3] = 1;
+                selectedColor = 0; 
+                break;
+
+            
+            glutPostRedisplay();
+        }
     }
 }
 

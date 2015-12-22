@@ -12,6 +12,7 @@ extern int p_width;
 extern const int n_colors;
 
 extern bool color_window_open;
+// extern int selectedColor;
 
 void init_2();
 

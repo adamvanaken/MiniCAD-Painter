@@ -28,7 +28,8 @@ enum Color { c_RED = 0, c_GREEN, c_BLUE, c_BLACK, c_PICKER } ;
 typedef struct _shape {
   int type; 
   void *shape;
-  enum Color color;
+  // enum Color color;
+  float color[4];
   int filled;
   struct _shape *prev;
   struct _shape *next;

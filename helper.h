@@ -12,6 +12,7 @@ extern int customPolyCount;
 extern bool fill;
 
 extern enum Color currentColor;
+extern float custom_color[4];
 
 double Distance(double x1, double y1, double x2, double y2);
 

@@ -28,22 +28,7 @@ void display(void) {
 
         while (end != NULL)
         {
-            // Set the drawing color
-            switch (end->color)
-            {
-              case c_BLACK:
-                glColor3f(0.0, 0.0, 0.0);
-                break;
-              case c_RED:
-                glColor3f(1.0, 0.0, 0.0);
-                break;
-              case c_GREEN:
-                glColor3f(0.0, 1.0, 0.0);
-                break;
-              case c_BLUE:  
-                glColor3f(0.0, 0.0, 1.0);
-                break;
-            }
+            glColor3f(end->color[0], end->color[1], end->color[2]);
 
             if (end->filled)
             {

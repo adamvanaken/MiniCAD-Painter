@@ -9,7 +9,7 @@
 extern int WIDTH;
 extern int HEIGHT;
 
-extern enum Tool { t_LINE = 0, t_TRI, t_RECT, t_CIRCLE, t_POLY };
+enum Tool { t_LINE = 0, t_TRI, t_RECT, t_CIRCLE, t_POLY };
 
 extern enum Tool currentTool;
 
@@ -20,6 +20,8 @@ extern double mouseMoveX, mouseMoveY;
 
 extern bool drawing;
 extern bool drawPoly;
+
+extern int selectedColor;
 
 void setTool(int x, int y);
 
