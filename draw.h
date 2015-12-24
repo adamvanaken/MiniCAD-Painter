@@ -5,6 +5,8 @@
 
 #define RES 400
 
+extern int canvas_window;
+
 void DrawRect(int x, int y, int r);
 
 void DrawRect4_Out(int x, int y, int x2, int y2);

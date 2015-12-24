@@ -204,3 +204,59 @@ void Clear()
     create_linked_list();
     glutPostRedisplay();
 }
+
+void hsl_to_rgb(float *h1, float *s1, float *l1)
+{
+    float h = *h1;
+    float s = *s1;
+    float l = *l1;
+
+    double d;
+
+    float C = (1 - fabs(2 * l - 1)) * s;
+    float hh = h/60.0;
+    float X = C * (1 - fabs((((int)hh) % 2) + modf(hh, &d) - 1));
+    float r = 0;
+    float g = 0;
+    float b = 0;
+
+    if( hh >= 0 && hh < 1 )
+    {
+        r = C;
+        g = X;
+    }
+    else if( hh>=1 && hh<2 )
+    {
+        r = X;
+        g = C;
+    }
+    else if( hh>=2 && hh<3 )
+    {
+        g = C;
+        b = X;
+    }
+    else if( hh>=3 && hh<4 )
+    {
+        g = X;
+        b = C;
+    }
+    else if( hh>=4 && hh<5 )
+    {
+        r = X;
+        b = C;
+    }
+    else
+    {
+        r = C;
+        b = X;
+    }
+    
+    float m = l-C/2;
+    r += m;
+    g += m;
+    b += m;
+
+    *h1 = r;
+    *s1 = g;
+    *l1 = b;
+}

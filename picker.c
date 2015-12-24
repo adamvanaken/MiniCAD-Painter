@@ -2,7 +2,6 @@
 
 #include "picker.h"
 
-int canvas_window;
 int color_window;
 
 const int n_colors = 8;
@@ -10,8 +9,12 @@ const int n_colors = 8;
 const int colorSize = 30;
 const int colorMargin = 10;
 
-int p_height = 500;
-int p_width = 2 * colorSize + 3 * colorMargin;
+const int p_height = 500;
+const int p_width = 2 * colorSize + 3 * colorMargin;
+
+#define max_width p_width + picker_size
+
+int picker_size = p_height - colorMargin - colorMargin;
 
 bool color_window_open = false;
 
@@ -86,30 +89,92 @@ void display_2(void)
 	    }
 	}
 
+	int x_off = p_width + colorMargin;
+	int y_off = p_height - colorMargin;
+
+	for (float i = 0; i < 360; i++)
+	{
+		for (float j = 0; j < 1; j += 0.01) {
+
+			// float r = 181;
+			float r = i;
+			float g = 1;
+			// float b = 0.5;
+			float b = j;
+			
+			// printf("%f, %f, %f ", r, g, b);
+
+			hsl_to_rgb(&r, &g, &b);
+			glColor3f(r, g, b);
+
+			// printf("%f, %f, %f\r\n", r, g, b);
+
+			glBegin(GL_POINTS);
+			glVertex2f(x_off + i, y_off - (100 * j));
+			glEnd();
+		}
+	}
+
 	glFlush();
+}
+
+void updatePickedColor(int x, int y)
+{
+	// selectedColor = 0;
+
+	float h = x - colorSize - colorMargin - colorMargin - colorMargin - colorMargin - colorSize;
+	float s = 1;
+	float l = (y - colorMargin) / 100.0;
+
+	hsl_to_rgb(&h, &s, &l);
+
+	a[selectedColor][0] = h;
+	a[selectedColor][1] = s;
+	a[selectedColor][2] = l;
+	glutSetWindow(color_window);
+	glutPostRedisplay();
+	glutSetWindow(canvas_window);
+
+	custom_color[0] = a[selectedColor][0];
+	custom_color[1] = a[selectedColor][1];
+	custom_color[2] = a[selectedColor][2];
+	custom_color[3] = a[selectedColor][3];
+}
+
+void motionCallback_2(int x, int y)
+{
+	if (x >= colorSize + colorSize + colorMargin + colorMargin + colorMargin && x <= colorSize + colorSize + colorMargin + colorMargin + colorMargin + 360 && y <= 100 + colorMargin && y >= colorMargin)
+	{
+    	updatePickedColor(x, y);
+	}
 }
 
 // button = { GLUT_LEFT_BUTTON, GLUT_MIDDLE_BUTTON, GLUT_RIGHT_BUTTON }
 // state = { GLUT_UP, GLUT_DOWN }
 void mouseCallback_2(int button, int state, int x, int y)
 {
-	int newColor = y / (colorSize + colorMargin) * 2;
-	if (x > p_width / 2)
-	{
-		newColor++;
-	}
-	if (newColor <= n_colors) {
-		selectedColor = newColor;
-		custom_color[0] = a[selectedColor][0];
-		custom_color[1] = a[selectedColor][1];
-		custom_color[2] = a[selectedColor][2];
-		custom_color[3] = a[selectedColor][3];
+	if (x < colorSize + colorMargin + colorSize + colorMargin) {
+		int newColor = y / (colorSize + colorMargin) * 2;
+		if (x > p_width / 2)
+		{
+			newColor++;
+		}
+		if (newColor <= n_colors) {
+			selectedColor = newColor;
+			custom_color[0] = a[selectedColor][0];
+			custom_color[1] = a[selectedColor][1];
+			custom_color[2] = a[selectedColor][2];
+			custom_color[3] = a[selectedColor][3];
 
-		glutSetWindow(color_window);
-		glutPostRedisplay();
-		glutSetWindow(canvas_window);
+			glutSetWindow(color_window);
+			glutPostRedisplay();
+			glutSetWindow(canvas_window);
+		}
+		// printf("X: %d, Y: %d, Index: %d\r\n", x, y, selectedColor);
+
+	} else if (x >= colorSize + colorSize + colorMargin + colorMargin + colorMargin && x <= colorSize + colorSize + colorMargin + colorMargin + colorMargin + 360 && y <= 100 + colorMargin && y >= colorMargin){
+		updatePickedColor(x, y);
 	}
-	// printf("X: %d, Y: %d, Index: %d\r\n", x, y, selectedColor);
 }
 
 void keyboardCallback_2(unsigned char key, GLint x, GLint y)
@@ -124,32 +189,32 @@ void keyboardCallback_2(unsigned char key, GLint x, GLint y)
 			glutSetWindow( canvas_window
 		 );
           break;
-
     }
-
 }
 
 void reshapeCallback_2(int width, int height)
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0, p_width, 0, p_height);
+	gluOrtho2D(0, max_width, 0, p_height);
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 	glMatrixMode(GL_MODELVIEW);
-	glutReshapeWindow( p_width, p_height);
+	glutReshapeWindow( max_width, p_height);
 }
 
 void createColorPicker()
 {
     // Create second window
     glutInitWindowPosition(700 + 100, 100);
-    glutInitWindowSize(p_width, p_height);
+    glutInitWindowSize(max_width, p_height);
     // glutInitWindowSize(700, 700);
     color_window = glutCreateWindow("Color Picker");
     glutKeyboardFunc(keyboardCallback_2);
     glutDisplayFunc(display_2);
     glutReshapeFunc(reshapeCallback_2);
+    glutMotionFunc(motionCallback_2);
     glutMouseFunc(mouseCallback_2);
+    glEnable(GL_POINT_SMOOTH);
     glutHideWindow();
 }
 

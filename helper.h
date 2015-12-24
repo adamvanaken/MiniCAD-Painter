@@ -36,4 +36,6 @@ void free_shape(Shape *s);
 
 void Clear();
 
+void hsl_to_rgb(float *h, float *s, float *l);
+
 #endif

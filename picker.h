@@ -3,14 +3,9 @@
 
 #include "draw.h"
 
-extern int canvas_window;
 extern int color_window;
 
-extern int p_height;
-extern int p_width;
-
 extern const int n_colors;
-
 extern bool color_window_open;
 // extern int selectedColor;
 

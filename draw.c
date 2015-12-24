@@ -1,5 +1,7 @@
 #include "draw.h"
 
+int canvas_window;
+
 void DrawRect(int x, int y, int r)
 {
     glBegin(GL_POLYGON);
