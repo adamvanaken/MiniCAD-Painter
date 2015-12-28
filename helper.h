@@ -14,6 +14,9 @@ extern bool fill;
 extern enum Color currentColor;
 extern float custom_color[4];
 
+extern float buf[1000];
+extern float zoom_level;
+
 double Distance(double x1, double y1, double x2, double y2);
 
 void AddPointToPoly(int x, int y);
@@ -37,5 +40,7 @@ void free_shape(Shape *s);
 void Clear();
 
 void hsl_to_rgb(float *h, float *s, float *l);
+
+void zoom(bool in);
 
 #endif

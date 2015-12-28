@@ -110,6 +110,30 @@ void display(void) {
     {
         DrawToolSelect(mouseX, mouseY);
     }
+
+    if (zoom_level != 0) {
+
+        int w = WIDTH;
+        int h = HEIGHT;
+        int buf_size = w/2 * h/2 * 3 * sizeof(float);
+        int p_size = pow(2, zoom_level);
+        // glPointSize(p_size);
+
+        // glBegin(GL_POINTS);
+        int buf_idx = 0;
+        for (int i = 0; i < 100; i += p_size) {
+            printf("(%d, %d), %f, %f, %f\r\n", p_size * (i % w/2), p_size * (i / h/2), buf[buf_idx], buf[buf_idx+1], buf[buf_idx+2]);
+            glColor3f(buf[buf_idx++], buf[buf_idx++], buf[buf_idx++]);
+            glVertex2f(p_size * (i % w/2) + 100, p_size * (i / h/2) + 100);
+            // glBegin(GL_POLYGON);
+            //     glVertex2f(p_size * (i % w/2), p_size * (i / h/2));
+            //     glVertex2f(p_size * (i % w/2) + p_size, p_size * (i / h/2));
+            //     glVertex2f(p_size * (i % w/2) + p_size, p_size * (i / h/2) + p_size);
+            //     glVertex2f(p_size * (i % w/2), p_size * (i / h/2) + p_size);
+            // glEnd();
+        }
+        // glEnd();
+    }
     
     glutSwapBuffers();
 }

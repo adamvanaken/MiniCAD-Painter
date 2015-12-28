@@ -18,15 +18,15 @@ int picker_size = p_height - colorMargin - colorMargin;
 
 bool color_window_open = false;
 
-float a[n_colors][3] = {  
-	{ 0, 0, 0 } ,
-	{ 1, 0, 0 } ,
-	{ 0, 1, 0 } ,
-	{ 0, 0, 1 } ,
-	{ 0.1, 0.5, 0.2 } ,
-	{ 0.2, 0.2, 0.7 } ,
-	{ 0.5, 0, 0.5 } ,
-	{ 0.5, 0.5, 0.5 }
+float color_palette[n_colors][4] = {  
+	{ 0, 0, 0, 1 } ,
+	{ 1, 0, 0, 1 } ,
+	{ 0, 1, 0, 1 } ,
+	{ 0, 0, 1, 1 } ,
+	{ 0.1, 0.5, 0.2, 1 } ,
+	{ 0.2, 0.2, 0.7, 1 } ,
+	{ 0.5, 0, 0.5, 1 } ,
+	{ 0.5, 0.5, 0.5, 1 }
 };
 
 void init_2()
@@ -71,7 +71,7 @@ void display_2(void)
 		    glEnd();
 		}
 
-		glColor3f(a[i][0], a[i][1], a[i][2]);
+		glColor3f(color_palette[i][0], color_palette[i][1], color_palette[i][2]);
 
 		glBegin(GL_POLYGON);
 	        glVertex2f(x, y);
@@ -92,6 +92,7 @@ void display_2(void)
 	int x_off = p_width + colorMargin;
 	int y_off = p_height - colorMargin;
 
+	glBegin(GL_POINTS);
 	for (float i = 0; i < 360; i++)
 	{
 		for (float j = 0; j < 1; j += 0.01) {
@@ -109,11 +110,11 @@ void display_2(void)
 
 			// printf("%f, %f, %f\r\n", r, g, b);
 
-			glBegin(GL_POINTS);
+			
 			glVertex2f(x_off + i, y_off - (100 * j));
-			glEnd();
 		}
 	}
+	glEnd();
 
 	glFlush();
 }
@@ -128,17 +129,17 @@ void updatePickedColor(int x, int y)
 
 	hsl_to_rgb(&h, &s, &l);
 
-	a[selectedColor][0] = h;
-	a[selectedColor][1] = s;
-	a[selectedColor][2] = l;
+	color_palette[selectedColor][0] = h;
+	color_palette[selectedColor][1] = s;
+	color_palette[selectedColor][2] = l;
 	glutSetWindow(color_window);
 	glutPostRedisplay();
 	glutSetWindow(canvas_window);
 
-	custom_color[0] = a[selectedColor][0];
-	custom_color[1] = a[selectedColor][1];
-	custom_color[2] = a[selectedColor][2];
-	custom_color[3] = a[selectedColor][3];
+	custom_color[0] = color_palette[selectedColor][0];
+	custom_color[1] = color_palette[selectedColor][1];
+	custom_color[2] = color_palette[selectedColor][2];
+	custom_color[3] = color_palette[selectedColor][3];
 }
 
 void motionCallback_2(int x, int y)
@@ -161,10 +162,10 @@ void mouseCallback_2(int button, int state, int x, int y)
 		}
 		if (newColor <= n_colors) {
 			selectedColor = newColor;
-			custom_color[0] = a[selectedColor][0];
-			custom_color[1] = a[selectedColor][1];
-			custom_color[2] = a[selectedColor][2];
-			custom_color[3] = a[selectedColor][3];
+			custom_color[0] = color_palette[selectedColor][0];
+			custom_color[1] = color_palette[selectedColor][1];
+			custom_color[2] = color_palette[selectedColor][2];
+			custom_color[3] = color_palette[selectedColor][3];
 
 			glutSetWindow(color_window);
 			glutPostRedisplay();

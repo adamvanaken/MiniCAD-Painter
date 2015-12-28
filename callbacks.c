@@ -100,40 +100,16 @@ void keyboardCallback(unsigned char key, GLint x, GLint y)
 
     switch (key)
     {
-        // escape, Q, q
-        case 27:
-        case 81:
-        case 113:
-          exit (0);
-          break;
-        // T
-        case 84:
-          setToolSelect(true, x, y);
-          break; 
-        // p
-        case 112:
-          openColorPicker();
-          break;
-        // r
-        case 114:
-          if (currentColor == c_RED)
-            currentColor = c_BLACK;
-          else
-            currentColor = c_RED;
-          break;
-        // g
-        case 103: 
-          if (currentColor == c_GREEN)
-            currentColor = c_BLACK;
-          else
-            currentColor = c_GREEN;
-          break;
         // b
         case 98:
           if (currentColor == c_BLUE)
             currentColor = c_BLACK;
           else
             currentColor = c_BLUE;
+          break;
+        // c
+        case 99:
+          Clear();
           break;
         // f
         case 102:
@@ -147,9 +123,37 @@ void keyboardCallback(unsigned char key, GLint x, GLint y)
             glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
           }
           break;
-        // c
-        case 99:
-          Clear();
+        // g
+        case 103: 
+          if (currentColor == c_GREEN)
+            currentColor = c_BLACK;
+          else
+            currentColor = c_GREEN;
+          break;
+        // escape, Q, q
+        case 27:
+        case 81:
+        case 113:
+          exit (0);
+          break;
+        // r
+        case 114:
+          if (currentColor == c_RED)
+            currentColor = c_BLACK;
+          else
+            currentColor = c_RED;
+          break;
+        // T
+        case 84:
+          setToolSelect(true, x, y);
+          break; 
+        // p
+        case 112:
+          openColorPicker();
+          break;
+        // z
+        case 122:
+          zoom(true);
           break;
     }
 
