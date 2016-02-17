@@ -266,10 +266,10 @@ float buf[1000];
 
 void zoom(bool in)
 {
-    int w = glutGet(GLUT_WINDOW_WIDTH);
-    int h = glutGet(GLUT_WINDOW_HEIGHT);
+    // int w = glutGet(GLUT_WINDOW_WIDTH);
+    // int h = glutGet(GLUT_WINDOW_HEIGHT);
 
-    int buf_size = w/2 * h/2 * 3 * sizeof(float);
+    // int buf_size = w/2 * h/2 * 3 * sizeof(float);
     // float *buf = malloc(buf_size);
 
     // for (int i = 0; i < size; i+=3) {
@@ -279,7 +279,7 @@ void zoom(bool in)
     //     printf("(%d, %d), %f, %f, %f\r\n", i % w/2, i / h/2, buf[i], buf[i+1], buf[i+2]);
     // }
 
-    glReadPixels(0, 0, 10, 10, GL_RGB, GL_FLOAT, buf);
+    // glReadPixels(0, 0, 10, 10, GL_RGB, GL_FLOAT, buf);
 
     // for (int i = 0; i < 100; i+=3) {
     //     printf("(%d, %d), %f, %f, %f\r\n", i % w/2, i / h/2, buf[i], buf[i+1], buf[i+2]);
@@ -293,8 +293,13 @@ void zoom(bool in)
 
     // glReadPixels(0, 0, 1, 1, GL_RGB, GL_FLOAT, buf);
 
-    Clear();
-    zoom_level++;
+    // Clear();
+    if (in)
+        zoom_level = zoom_level <= 1 ? 0 : zoom_level - 1;
+    else
+        zoom_level = zoom_level >= 9 ? 10 : zoom_level + 1;
+
+    glutPostRedisplay();
 }
 
 

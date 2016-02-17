@@ -153,6 +153,10 @@ void keyboardCallback(unsigned char key, GLint x, GLint y)
           break;
         // z
         case 122:
+          zoom(false);
+          break;
+        // Z
+        case 90:
           zoom(true);
           break;
     }
