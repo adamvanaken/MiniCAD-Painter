@@ -30,10 +30,10 @@ void display(void) {
 
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
     glColor4f(0.3, 0.3, 0.3, 0.3);
-    DrawRect(HEIGHT/2 - trans_x + 10, WIDTH/2 - trans_y - 10, c_HEIGHT/2 , c_WIDTH/2);
+    DrawRect(WIDTH/2 - trans_x + 10, HEIGHT/2 - trans_y - 10, c_WIDTH/2 , c_HEIGHT/2);
 
     glColor3f(1, 1, 1);
-    DrawRect(HEIGHT/2 - trans_x, WIDTH/2 - trans_y, c_HEIGHT/2 , c_WIDTH/2);
+    DrawRect(WIDTH/2 - trans_x, HEIGHT/2 - trans_y, c_WIDTH/2 , c_HEIGHT/2);
 
     if (start != NULL)
     { 
