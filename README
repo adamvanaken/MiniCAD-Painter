@@ -5,7 +5,8 @@ Compile with 'make' and run with './main.o'
 Can switch tool by holding down middle-mouse button (or 'up' arrow or 'shift+T') and dragging mouse cursor to desired tool.
 
 Known bugs and limitations:
-* Window resize is "disabled"
+* Zooming still a WIP
+* "Canvas" aspect still a WIP 
 * Polygon mode works, but only for convex shapes AND/OR unfilled mode
 
 File directory:
@@ -16,9 +17,19 @@ File directory:
     - callbacks.c
         This file mostly just holds the callbacks for the OpenGL events. However it also manages setting the tool with middle-mouse button/up arrow/shift+T.
     - helper.c
-        This file has helper functions to add new shapes to the list of shapes. It also includes the clear functions.
+        This file has helper functions to add new shapes to the list of shapes. It also includes the clear and zoom functions
     - dlinked.c (dlinked.h)
         This is the linked list struct as well as all shape structs and constructor calls.
-
-WIP:
-    - picker.c is a color picker
+    - picker.c 
+        This is code for a custom color picker.
+        
+To Do:
+* Finish zooming
+    * Drawing while zoomed
+    * Zoom towards mouse cursor
+* Add panning/scrollbars
+* Limit drawing to within the "canvas"
+* Toolbars (if canvas size is greater than window size)
+* Point (pixel) drawing
+* Transparency
+* Exports (save/load)
