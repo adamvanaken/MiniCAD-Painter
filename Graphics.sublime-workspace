@@ -822,6 +822,10 @@
 	{
 		"height": 0.0
 	},
+	"output.sftp":
+	{
+		"height": 223.0
+	},
 	"pinned_build_system": "",
 	"project": "Graphics.sublime-project",
 	"replace":
@@ -902,7 +906,7 @@
 		[
 			[
 				"",
-				"~/Documents/workspace/CIS597/CIS597.sublime-project"
+				"~/workspace/Graphics/graphics.sublime-project"
 			]
 		],
 		"width": 380.0

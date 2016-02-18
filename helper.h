@@ -14,8 +14,9 @@ extern bool fill;
 extern enum Color currentColor;
 extern float custom_color[4];
 
-extern float buf[1000];
 extern float zoom_level;
+extern float trans_x;
+extern float trans_y;
 
 double Distance(double x1, double y1, double x2, double y2);
 
@@ -41,6 +42,6 @@ void Clear();
 
 void hsl_to_rgb(float *h, float *s, float *l);
 
-void zoom(bool in);
+void zoom(int in);
 
 #endif

@@ -5,8 +5,8 @@
 #include "picker.h"
 
 void init() {
-    // Set the clear color to white
-    glClearColor(1,1,1,1);
+    // Set the clear color to light grey
+    glClearColor(0.7,0.7,0.7,1);
     glMatrixMode(GL_PROJECTION);
     glOrtho(-1, 1.0, -1, 1.0, -1.0, 1.0);
     glMatrixMode(GL_MODELVIEW);
@@ -26,7 +26,14 @@ void display(void) {
     // glTranslated(-zoomTranslateX, -zoomTranslateY, 0);
 
     // glTranslated(totalMovedX, totalMovedY, 0);
-    glScaled(zoom_level + 1, zoom_level + 1, 1);
+    glScaled(zoom_level, zoom_level, 1);
+
+    glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+    glColor4f(0.3, 0.3, 0.3, 0.3);
+    DrawRect(HEIGHT/2 - trans_x + 10, WIDTH/2 - trans_y - 10, c_HEIGHT/2 , c_WIDTH/2);
+
+    glColor3f(1, 1, 1);
+    DrawRect(HEIGHT/2 - trans_x, WIDTH/2 - trans_y, c_HEIGHT/2 , c_WIDTH/2);
 
     if (start != NULL)
     { 
@@ -90,6 +97,8 @@ void display(void) {
         }
     }
 
+    glPopMatrix();
+
     if (drawing)
     {
         switch (currentTool)
@@ -112,8 +121,6 @@ void display(void) {
                 break;
         }
     }
-
-    glPopMatrix();
 
     if (toolSelect)
     {

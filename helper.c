@@ -14,6 +14,10 @@ enum Color currentColor;
 enum Color customColor;
 float custom_color[4];
 
+float zoom_level = 1;
+float trans_x = 0;
+float trans_y = 0;
+
 double Distance(double x1, double y1, double x2, double y2)
 {
     return sqrt( pow(x1-x2, 2) + pow(y1-y2, 2) );
@@ -261,15 +265,20 @@ void hsl_to_rgb(float *h1, float *s1, float *l1)
     *l1 = b;
 }
 
-float zoom_level = 0;
-float buf[1000];
-
 void zoom(bool in)
 {
-    if (in)
-        zoom_level = zoom_level <= 1 ? 0 : zoom_level - 1;
-    else
-        zoom_level = zoom_level >= 9 ? 10 : zoom_level + 1;
+    if (in) {
+        zoom_level = zoom_level / 1.2f;
+        if (zoom_level <= 1) {
+            zoom_level = 1;
+        }
+    }
+    else {
+        zoom_level = zoom_level * 1.2f;
+        if (zoom_level >= 10) {
+            zoom_level = 10;
+        }
+    }
 
     glutPostRedisplay();
 }

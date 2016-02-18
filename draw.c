@@ -2,7 +2,17 @@
 
 int canvas_window;
 
-void DrawRect(int x, int y, int r)
+void DrawRect(int x, int y, int h, int w)
+{
+    glBegin(GL_POLYGON);
+        glVertex2f(x - w, y - h);
+        glVertex2f(x - w, y + h);
+        glVertex2f(x + w, y + h);
+        glVertex2f(x + w, y - h);
+    glEnd();
+}
+
+void DrawSquare(int x, int y, int r)
 {
     glBegin(GL_POLYGON);
         glVertex2f(x - r, y - r);
@@ -204,7 +214,7 @@ void DrawToolSelect(int c_x, int c_y)
     //DrawRect(c_x, c_y, 20);
     DrawCircle(c_x, c_y, 20, false);
     DrawLine(c_x - 5, c_y - 5, c_x + 5, c_y + 5);
-    DrawRect(c_x + 35, c_y, 10);
+    DrawSquare(c_x + 35, c_y, 10);
     DrawCircle(c_x, c_y - 35, 10, false);
     DrawTri(c_x, c_y + 45, 15, 15);
     glPushMatrix();

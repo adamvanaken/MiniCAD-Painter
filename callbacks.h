@@ -8,6 +8,7 @@
 
 extern int WIDTH;
 extern int HEIGHT;
+extern int c_WIDTH, c_HEIGHT;
 
 enum Tool { t_LINE = 0, t_TRI, t_RECT, t_CIRCLE, t_POLY };
 

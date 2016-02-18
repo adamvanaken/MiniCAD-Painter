@@ -3,6 +3,7 @@
 #include "callbacks.h"
 
 int WIDTH = 700, HEIGHT = 700;
+int c_WIDTH = 400, c_HEIGHT = 400;
 
 // enum Tool { t_LINE = 0, t_TRI, t_RECT, t_CIRCLE, t_POLY } ;
 
@@ -270,7 +271,7 @@ void passiveMotionCallback(int x, int y)
 // state = { GLUT_UP, GLUT_DOWN }
 void mouseCallback(int button, int state, int x, int y)
 {
-    glutPostRedisplay();  // Update screen with new rotation data
+    glutPostRedisplay();
 
     switch (button)
     {
